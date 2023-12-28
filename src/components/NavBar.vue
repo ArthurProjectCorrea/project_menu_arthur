@@ -172,6 +172,9 @@ const modules = data.modules;
 const pages = data.pages;
 const moduleDefaultId = data.users;
 
+// const moduleAtual = 1;
+
+
 
 // FILTRANDO DADOS DO ARRAY
 const valueModuleDefault = moduleDefaultId.moduledefault_id;
