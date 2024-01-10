@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import TitlePage from "../../components/layout/TitlePage.vue";
+// import TitlePage from "../../components/layout/TitlePage.vue";
 import data from "../../DB.js";
 
 

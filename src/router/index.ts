@@ -15,9 +15,9 @@ const rotas: RouteRecordRaw[] = [
   },
 ];
 
-const roteador = createRouter({
+const router = createRouter({
   history: createWebHashHistory(),
   routes: rotas,
 });
 
-export default roteador;
+export default router;

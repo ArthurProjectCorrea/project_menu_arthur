@@ -1,0 +1,59 @@
+{
+  "modules": [
+    {
+      "id": 1,
+      "label": "protocolos",
+      "icon": "fa-list-check",
+      "route_default_name": "deshboard"
+    },
+    {
+      "id": 2,
+      "label": "projetos",
+      "icon": "fa-folder-open",
+      "route_default_name": "protocolos"
+    },
+    {
+      "id": 3,
+      "label": "tarefas",
+      "icon": "fa-layer-group",
+      "route_default_name": "protocolos"
+    },
+    {
+      "id": 4,
+      "label": "base de dados",
+      "icon": "fa-database",
+      "route_default_name": "protocolos"
+    }
+  ],
+  "pages": [
+    {
+      "id": 1,
+      "module_id": 1,
+      "label": "dashboard",
+      "icon": "fa-home",
+      "route_name": "deshboard",
+      "group": 1
+    },
+    {
+      "id": 2,
+      "module_id": 1,
+      "label": "protocolos",
+      "icon": "fa-home",
+      "route_name": "protocolos",
+      "group": 1
+    }
+  ],
+  "empresas": [
+    { "id": 1, "nome": "Hpar" },
+    { "id": 2, "nome": "Vue" }
+  ],
+  "users": [
+    { "id": 1, "nome": "Arthur", "empresa_id": 1, "moduledefault_id": 1 },
+    { "id": 2, "nome": "Arthur", "empresa_id": 1, "moduledefault_id": 1 },
+    { "id": 3, "nome": "Carou", "empresa_id": 1, "moduledefault_id": 3 }
+  ],
+  "groups": [
+    { "id": 1, "label": "default", "icon": "" },
+    { "id": 2, "label": "Cadastros", "icon": "fa-list" }
+  ]
+}

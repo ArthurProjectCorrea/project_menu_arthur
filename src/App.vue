@@ -1,6 +1,6 @@
 <template>
   <main class="flex items-start justify-between w-full h-full">
-    <NavBar class=""/>
+    <SideBar class=""/>
     <div class="w-full h-full">
 
       <router-view></router-view>
@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import NavBar from './components/NavBar.vue';
+import SideBar from './layout/sidebar/SideBar.vue';
 </script>
 
 <style scoped></style>

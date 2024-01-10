@@ -33,9 +33,9 @@
 </template>
 
 <script setup>
-import TitlePage from "../../components/layout/TitlePage.vue";
+// import TitlePage from "../../components/layout/TitlePage.vue";
 import data from "../../DB.js";
-import dataProt from "../../table/protocolos.js";
+// import dataProt from "../../table/protocolos.js";
 
 const pages = data.pages;
 const protocolosTable = dataProt.protocolos;
