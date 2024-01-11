@@ -20,15 +20,18 @@
                 class="flex flex-col items-start justify-between w-full gap-2 text-sm font-medium uppercase"
               >
                 <div>
-                  <p class="w-full">{{ page.label }}</p>
+                  <p class="w-full">{{ page.name }}</p>
                 </div>
                 <div class="flex w-full text-xs" v-if="modules">
                   <div>
                     <span>Modulo:</span>
                   </div>
                   <div v-for="module in modules" :key="module.id">
-                    <span v-if="module.id === page.module_id" class="ml-2 italic" >
-                      {{ module.label }}
+                    <span
+                      v-if="module.id === page.module_id"
+                      class="ml-2 italic"
+                    >
+                      {{ module.name }}
                     </span>
                   </div>
                 </div>
@@ -63,14 +66,13 @@ const checkFetchData = async () => {
 
 const inputFilter = ref("");
 const emit = defineEmits(["closeModal"]);
-
 const closeModal = () => {
   emit("closeModal");
 };
 
 const filterList = computed(() =>
   pages.value.filter((page) =>
-    page.label.toLowerCase().includes(inputFilter.value.toLowerCase())
+    page.name.toLowerCase().includes(inputFilter.value.toLowerCase())
   )
 );
 

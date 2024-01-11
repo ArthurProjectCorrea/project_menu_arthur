@@ -9,26 +9,23 @@
             {{ nameModal }}
           </h1>
         </div>
-        <button @click="closeModal" class="btn-button-default">
-          <div class="flex items-center justify-center w-8 h-8">
-            <i class="fa-solid fa-xmark"></i>
-          </div>
+        <button @click="closeModal" class="btn-background-gray">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
       <slot class=""></slot>
       <div
-        class="relative flex items-center justify-between w-full gap-2 p-2 bg-gray-300 rounded-b-lg"
+        class="relative flex items-center justify-end w-full gap-2 p-2 bg-gray-300 rounded-b-lg"
       >
-        <div></div>
-        <button @click="closeModal" class="btn-button-default">
-          <div class="flex items-center justify-center w-8 h-8">
-            <i class="fa-solid fa-xmark"></i>
-          </div>
-        </button>
-        <button @click="closeModal" class="btn-button-default">
-          <div class="flex items-center justify-center w-8 h-8">
-            <i class="fa-solid fa-xmark"></i>
-          </div>
+        <slot name="baseboard"></slot>
+        <button
+          @click="save"
+          type="submit"
+          class="btn-background-blue"
+          v-if="buttonSave"
+        >
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span class="font-bold uppercase">salvar</span>
         </button>
       </div>
     </div>
@@ -43,16 +40,24 @@ const props = defineProps({
     type: Boolean,
     default: null,
   },
+  buttonSave: {
+    type: Boolean,
+    default: null,
+  },
   nameModal: {
     type: String,
     default: null,
   },
 });
 
-const emit = defineEmits(["closeModal"]);
+const emit = defineEmits(["closeModal", "save"]);
 
 const closeModal = () => {
   emit("closeModal");
+};
+
+const save = () => {
+  emit("save");
 };
 </script>
 
@@ -62,6 +67,6 @@ const closeModal = () => {
 }
 
 .modal {
-  @apply flex flex-col w-1/2 gap-2 rounded-lg shadow-lg bg-gray-100 h-4/5 justify-between;
+  @apply flex flex-col w-1/2 rounded-lg shadow-lg bg-gray-100 h-4/5 justify-between;
 }
 </style>

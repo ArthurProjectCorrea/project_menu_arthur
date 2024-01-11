@@ -20,7 +20,7 @@
                 class="flex flex-col items-start justify-between w-full gap-2 text-sm font-medium uppercase"
               >
                 <p class="w-full">
-                  {{ module.label }}
+                  {{ module.name }}
                 </p>
               </div>
             </router-link>
@@ -47,14 +47,13 @@ onMounted(async () => {
 
 const inputFilter = ref("");
 const emit = defineEmits(["closeModal"]);
-
 const closeModal = () => {
   emit("closeModal");
 };
 
 const filterList = computed(() =>
   modules.value.filter((module) =>
-    module.label.toLowerCase().includes(inputFilter.value.toLowerCase())
+    module.name.toLowerCase().includes(inputFilter.value.toLowerCase())
   )
 );
 

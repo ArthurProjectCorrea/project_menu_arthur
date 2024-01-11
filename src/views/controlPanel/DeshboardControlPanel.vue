@@ -1,5 +1,5 @@
 <template>
-<h1>tela do protocolos</h1>
+<h1>tela do deshboard Control Panel</h1>
 
 </template>
 

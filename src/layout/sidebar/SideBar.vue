@@ -19,16 +19,13 @@
       </div>
       <!-- MODULE -->
       <div class="w-full p-2 border-b border-gray-300">
-        <button
-          @click="toggleModulePopup"
-          class="flex items-center justify-center w-full my-2 0 btn-button-default"
-        >
+        <button @click="toggleModulePopup" class="btn-special">
           <div class="flex items-center justify-center w-full">
             <div class="flex items-center justify-center w-8 h-8 p-2">
               <i class="fa-solid" :class="selectedModule.icon"></i>
             </div>
             <div class="text-xs font-bold uppercase" v-show="!isMaximize">
-              <span>{{ selectedModule.label }}</span>
+              <span>{{ selectedModule.name }}</span>
             </div>
           </div>
         </button>
@@ -42,10 +39,7 @@
       </div>
       <!-- SEARCH -->
       <div class="w-full p-2 border-b border-gray-300">
-        <button
-          @click="toggleSearchPopup"
-          class="flex items-center justify-center w-full my-2 0 btn-button-default"
-        >
+        <button @click="toggleSearchPopup" class="btn-special">
           <div class="flex items-center justify-center w-full">
             <div class="flex items-center justify-center w-8 h-8 p-2">
               <i class="fa-solid fa-magnifying-glass"></i>
@@ -61,12 +55,9 @@
         />
       </div>
       <!-- OPTION MENU CUSTOM FROM MODULE -->
-      <div class="w-full p-2 overflow-y-auto h-[530px]">
+      <div class="flex flex-col w-full p-2 overflow-y-auto flex-nowrap">
         <template v-for="page in pages">
-          <div
-            v-if="page.module_id === selectedModule.id"
-            :title="page.label"
-          >
+          <div v-if="page.module_id === selectedModule.id" :title="page.name">
             <router-link
               :to="{ name: page.route_name }"
               class="flex items-center gap-2 p-2 text-gray-600 rounded-md hover:bg-blue-100 hover:text-blue-500"
@@ -78,38 +69,19 @@
                 class="text-sm font-medium uppercase line-clamp-1"
                 v-show="!isMaximize"
               >
-                {{ page.label }}
+                {{ page.name }}
               </div>
             </router-link>
           </div>
         </template>
       </div>
-      <!-- OPTION MENU GROUP MENU -->
-      <!-- <div class="w-full p-2">
-                      <template v-for="group in groups">
-                          <div
-                              v-if="group.id != 1"
-                              :title="group.label"
-                              class="flex items-center gap-2 p-2 rounded-md hover:bg-blue-100 hover:text-blue-500"
-                          >
-                              <div class="flex items-center justify-center w-8 h-8">
-                                  <i class="fa-solid" :class="group.icon"></i>
-                              </div>
-                              <div
-                                  
-                                  class="text-sm font-medium uppercase line-clamp-1"
-                              >
-                                  {{ group.label }}
-                              </div>
-                          </div>
-                      </template>
-                  </div> -->
     </div>
     <!-- OPTION SYSTEM -->
     <div class="w-full p-2 border-t border-gray-300">
-      <div
+      <button
+        @click="toggleProfilePopup"
         title="perfil"
-        class="flex items-center gap-2 p-2 text-gray-600 rounded-md hover:bg-blue-100 hover:text-blue-500"
+        class="flex items-center w-full gap-2 p-2 text-gray-600 rounded-md hover:bg-blue-100 hover:text-blue-500"
       >
         <div class="flex items-center justify-center w-8 h-8">
           <i class="fa-solid fa-user"></i>
@@ -117,6 +89,12 @@
         <div class="text-sm font-medium uppercase" v-show="!isMaximize">
           <p>PERFIL</p>
         </div>
+      </button>
+      <div>
+        <ProfilePopup
+          :showModal="profilePopupVisible"
+          @closeModal="toggleProfilePopup"
+        />
       </div>
       <div
         title="notificação"
@@ -141,6 +119,7 @@
         </div>
       </div>
       <div
+        @click="logoult"
         title="sair"
         class="flex items-center gap-2 p-2 text-gray-600 rounded-md hover:bg-blue-100 hover:text-blue-500"
       >
@@ -160,12 +139,13 @@ import { reactive, ref, onMounted, watch } from "vue";
 import { fetchCurrentUser, fetchPages } from "../../fetchData";
 import SearchPopup from "./popup/SearchPopup.vue";
 import ModulePopup from "./popup/ModulePopup.vue";
+import ProfilePopup from "./popup/ProfilePopup.vue";
 import Logo from "../../components/Logo.vue";
 
 const modulePopupVisible = ref(false);
 const searchPopupVisible = ref(false);
+const profilePopupVisible = ref(false);
 const isMaximize = ref(false);
-
 
 const toggleModulePopup = (valor) => {
   modulePopupVisible.value = !modulePopupVisible.value;
@@ -173,8 +153,12 @@ const toggleModulePopup = (valor) => {
 const toggleSearchPopup = (valor) => {
   searchPopupVisible.value = !searchPopupVisible.value;
 };
+const toggleProfilePopup = (valor) => {
+  profilePopupVisible.value = !profilePopupVisible.value;
+};
 
-const pages = ref();
+const pages = ref([]);
+const moduleDefault = ref([]);
 
 const toggleIsMaximize = () => {
   isMaximize.value = !isMaximize.value;
@@ -183,10 +167,13 @@ const toggleIsMaximize = () => {
 
 const checkFetchData = async () => {
   pages.value = await fetchPages();
-};
-
-const saveCurrentUser = async () => {
-  localStorage.setItem("storageUser", JSON.stringify(await fetchCurrentUser()));
+  console.log(pages.value);
+  const resultCurrentUser = await fetchCurrentUser();
+  moduleDefault.value = resultCurrentUser.module || [];
+  localStorage.setItem(
+    "storageModuleDefault",
+    JSON.stringify(moduleDefault.value)
+  );
 };
 
 const saveNewCurrentModule = (item) => {
@@ -195,20 +182,25 @@ const saveNewCurrentModule = (item) => {
 };
 
 const checkModuleLocalStorage = () => {
-  const currentModule = JSON.parse(localStorage.getItem("storageModule")) || [];
-  const currentUser = JSON.parse(localStorage.getItem("storageUser")) || [];
-  return currentModule ? currentModule : currentUser.module;
+  const resultModuleDefault =
+    JSON.parse(localStorage.getItem("storageModuleDefault")) || [];
+  const currentModule =
+    JSON.parse(localStorage.getItem("storageModule")) || resultModuleDefault;
+  return currentModule;
 };
 
 const selectedModule = ref(checkModuleLocalStorage());
 
 watch(selectedModule, () => {});
 
-onMounted(async () => {
-  saveCurrentUser();
+const logoult = () => {
+  localStorage.clear();
+  location.reload();
+};
 
+onMounted(async () => {
   checkFetchData();
-  
+
   const currentIsMaximize = localStorage.getItem("storageIsMaximize");
   if (currentIsMaximize !== null) {
     isMaximize.value = JSON.parse(currentIsMaximize);

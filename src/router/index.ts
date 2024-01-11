@@ -1,6 +1,8 @@
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
 import Deshboard from "../views/protocolos/Deshboard.vue";
 import Protocolos from "../views/protocolos/Protocolos.vue";
+import Workshop from "../views/controlPanel/workshop/Workshop.vue";
+import DeshboardControlPanel from "../views/controlPanel/DeshboardControlPanel.vue";
 
 const rotas: RouteRecordRaw[] = [
   {
@@ -12,6 +14,16 @@ const rotas: RouteRecordRaw[] = [
     path: "/protocolos",
     name: "protocolos",
     component: Protocolos,
+  },
+  {
+    path: "/deshboard_controlPanel",
+    name: "deshboardControlPanel",
+    component: DeshboardControlPanel,
+  },
+  {
+    path: "/workshop",
+    name: "oficina",
+    component: Workshop,
   },
 ];
 

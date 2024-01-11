@@ -2,58 +2,111 @@
   "modules": [
     {
       "id": 1,
-      "label": "protocolos",
+      "name": "protocolos",
       "icon": "fa-list-check",
       "route_default_name": "deshboard"
     },
     {
       "id": 2,
-      "label": "projetos",
+      "name": "projetos",
       "icon": "fa-folder-open",
       "route_default_name": "protocolos"
     },
     {
       "id": 3,
-      "label": "tarefas",
+      "name": "tarefas",
       "icon": "fa-layer-group",
       "route_default_name": "protocolos"
     },
     {
       "id": 4,
-      "label": "base de dados",
+      "name": "base de dados",
       "icon": "fa-database",
       "route_default_name": "protocolos"
+    },
+    {
+      "id": 5,
+      "name": "painel de controle",
+      "icon": "fa-gears",
+      "route_default_name": "deshboardControlPanel"
     }
   ],
   "pages": [
     {
       "id": 1,
       "module_id": 1,
-      "label": "dashboard",
+      "name": "dashboard",
       "icon": "fa-home",
-      "route_name": "deshboard",
-      "group": 1
+      "route_name": "deshboard"
     },
     {
       "id": 2,
       "module_id": 1,
-      "label": "protocolos",
+      "name": "protocolos",
       "icon": "fa-home",
-      "route_name": "protocolos",
-      "group": 1
+      "route_name": "protocolos"
+    },
+    {
+      "id": 3,
+      "module_id": 5,
+      "name": "oficina",
+      "icon": "fa-home",
+      "route_name": "oficina"
+    },
+    {
+      "id": 4,
+      "module_id": 5,
+      "name": "dashboard",
+      "icon": "fa-home",
+      "route_name": "deshboardControlPanel"
     }
   ],
   "empresas": [
-    { "id": 1, "nome": "Hpar" },
-    { "id": 2, "nome": "Vue" }
+    {
+      "id": 1,
+      "name": "Hpar"
+    },
+    {
+      "id": 2,
+      "name": "Vue"
+    }
   ],
   "users": [
-    { "id": 1, "nome": "Arthur", "empresa_id": 1, "moduledefault_id": 1 },
-    { "id": 2, "nome": "Arthur", "empresa_id": 1, "moduledefault_id": 1 },
-    { "id": 3, "nome": "Carou", "empresa_id": 1, "moduledefault_id": 3 }
+    {
+      "id": 1,
+      "name": "Arthur",
+      "empresa_id": 1,
+      "moduledefault_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Arthur",
+      "empresa_id": 1,
+      "moduledefault_id": 1
+    },
+    {
+      "id": 3,
+      "name": "Carou",
+      "empresa_id": 1,
+      "moduledefault_id": 3
+    }
   ],
   "groups": [
-    { "id": 1, "label": "default", "icon": "" },
-    { "id": 2, "label": "Cadastros", "icon": "fa-list" }
+    {
+      "id": 1,
+      "name": "default",
+      "icon": ""
+    },
+    {
+      "id": 2,
+      "name": "Cadastros",
+      "icon": "fa-list"
+    }
+  ],
+  "forms": [
+    {
+      "id": "259f",
+      "name": "aaaaaaa"
+    }
   ]
 }
