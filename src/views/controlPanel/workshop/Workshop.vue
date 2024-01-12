@@ -16,7 +16,7 @@
     />
   </TitlePage>
   <div class="p-2">
-    <h1>tela da oficina</h1>
+    <h1>em desenvolvimento</h1>
   </div>
 </template>
 

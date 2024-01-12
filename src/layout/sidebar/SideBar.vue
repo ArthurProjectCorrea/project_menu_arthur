@@ -79,7 +79,7 @@
     <!-- OPTION SYSTEM -->
     <div class="w-full p-2 border-t border-gray-300">
       <button
-        @click="toggleProfilePopup"
+        @click=""
         title="perfil"
         class="flex items-center w-full gap-2 p-2 text-gray-600 rounded-md hover:bg-blue-100 hover:text-blue-500"
       >
@@ -167,7 +167,6 @@ const toggleIsMaximize = () => {
 
 const checkFetchData = async () => {
   pages.value = await fetchPages();
-  console.log(pages.value);
   const resultCurrentUser = await fetchCurrentUser();
   moduleDefault.value = resultCurrentUser.module || [];
   localStorage.setItem(
