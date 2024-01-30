@@ -4,6 +4,7 @@
     @closeModal="closeModal"
     :buttonSave="true"
     @save="save"
+    :loading="loading"
   >
     <form class="grid w-full grid-cols-2 gap-2 p-2 grid-rows-8">
       <Input
@@ -37,6 +38,7 @@
         required
       />
     </form>
+
   </Popup>
 </template>
 
@@ -50,6 +52,7 @@ import Select from "../../../../components/input/Select.vue";
 import axios from "axios";
 
 const modules = ref([]);
+const loading = ref(false);
 const namePopup = "Cadastro de Tela";
 
 const formulario = ref({
@@ -61,19 +64,24 @@ const formulario = ref({
 });
 
 const save = async () => {
+  loading.value = true;
   try {
     const ultimaSequencia = await fetchPages();
     const novaSequencia = ultimaSequencia.length + 1;
     formulario.value.id = novaSequencia;
+    await new Promise(resolve => setTimeout(resolve, 2000));
     const response = await axios.post(
       "http://localhost:3000/pages",
       formulario.value
     );
+    loading.value = false;
     
     console.log("Formulário salvo com sucesso!", response.data);
+    
     location.reload();
   } catch (error) {
     console.error("Erro ao salvar o formulário", error);
+    loading.value = false;
   }
 };
 

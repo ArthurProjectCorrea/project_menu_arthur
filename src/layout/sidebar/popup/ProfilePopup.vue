@@ -29,7 +29,6 @@ onMounted(async () => {
 
 const checkFetchData = async () => {
   const result = await fetchCurrentUser()
-  console.log(result)
   user.value = result.user || [];
   module.value = result.module || [];
   empresa.value = result.empresa || [];

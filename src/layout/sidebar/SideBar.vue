@@ -57,7 +57,7 @@
       <!-- OPTION MENU CUSTOM FROM MODULE -->
       <div class="flex flex-col w-full p-2 overflow-y-auto flex-nowrap">
         <template v-for="page in pages">
-          <div v-if="page.module_id === selectedModule.id" :title="page.name">
+          <div v-if="page.module_id == selectedModule.id" :title="page.name">
             <router-link
               :to="{ name: page.route_name }"
               class="flex items-center gap-2 p-2 text-gray-600 rounded-md hover:bg-blue-100 hover:text-blue-500"

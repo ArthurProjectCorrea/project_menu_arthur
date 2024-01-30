@@ -55,13 +55,7 @@ export const fetchPages = async () => {
 export const fetchCurrentPage = async (page_id) => {
     try {
         const pages = await fetchPages();
-    
-        const page = pages.find(page => page.id === page_id);
-    
-        if (!page) {
-            throw new Error(`page with id ${page_id} not found.`);
-        }
-        
+        const page = pages.find(page => page.id == page_id);
         return { page };
     } catch (error) {
         console.error("Error fetching Current Page:", error);
@@ -75,9 +69,10 @@ export const fetchCurrentUser = async () => {
         const modules = await fetchModules();
         const empresas = await fetchEmpresas();
 
-        const user = users.find(user => user.id === 1);
+        const user = users.find(user => user.id == 1);
 
         const moduledefault_id = user.moduledefault_id;
+
         const module = modules.find(module => module.id === moduledefault_id);
 
         const empresa_id = user.empresa_id;

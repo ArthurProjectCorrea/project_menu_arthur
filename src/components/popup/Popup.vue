@@ -23,8 +23,9 @@
           type="submit"
           class="btn-background-blue"
           v-if="buttonSave"
+          :disabled="!buttonSave"
         >
-          <i class="fa-solid fa-floppy-disk"></i>
+          <i class="fa-solid" :class="!loading ? 'fa-floppy-disk' : 'fa-spinner animate-spin'"></i>
           <span class="font-bold uppercase">salvar</span>
         </button>
       </div>
@@ -40,6 +41,10 @@ const props = defineProps({
     type: Boolean,
     default: null,
   },
+  loading: {
+    type: Boolean,
+    default: null,
+  },
   buttonSave: {
     type: Boolean,
     default: null,
@@ -50,7 +55,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["closeModal", "save"]);
+const emit = defineEmits([ "closeModal", "save"]);
 
 const closeModal = () => {
   emit("closeModal");
